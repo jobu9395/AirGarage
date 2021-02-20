@@ -30,6 +30,7 @@ def form():
             data = data.append(biz, ignore_index=True)
 
         data_adjustment(data)
+        image_adjustment(data)
         data = data.sort_values(by='parking_lot_score', ascending=True)
 
         HTML_data = data.to_html()
@@ -62,6 +63,13 @@ def data_adjustment(data):
 
     return data
 
+
+def image_adjustment(data):
+    for image_url in data['image_url']:
+        new_image_url = '<img src="%s", alt="business image", style="width:40px;heigh:40px">' % image_url
+        if image_url != '':
+            data['image_url'] = data['image_url'].replace(image_url, new_image_url)
+    return data['image_url']
 
 
 if __name__ == '__main__':
