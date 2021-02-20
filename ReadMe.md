@@ -16,3 +16,5 @@ page prompting them to enter a valid input.
 go to the following URL: http://127.0.0.1:5000/
 
 6. Project requirements: https://www.notion.so/Lowest-Rated-Parking-Lots-Coding-Challenge-1e29d723606048bf833e6661cfd3aed5
+
+7. Project dependencies: Python 3.7, YelpAPI, Pandas
