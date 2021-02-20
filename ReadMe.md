@@ -1,6 +1,6 @@
-#AirGarage Low Quality Parking Lot Finder 
-####Version 1.0 2/20/2021
-####Author: Josh Burdett
+AirGarage Low Quality Parking Lot Finder 
+Version 1.0 2/20/2021
+Author: Josh Burdett
 
 1. This app takes user input in the following format: 'city, state', and returns a list of up to 50 low 
 parking lots in thea area, listed in ascending order according to the metric: parking_lot_score
@@ -15,3 +15,4 @@ page prompting them to enter a valid input.
 5. To run locally as a test web app, download the code directory and run app.py as a flask project.  Then open your browser and 
 go to the following URL: http://127.0.0.1:5000/
 
+6. Project requirements: https://www.notion.so/Lowest-Rated-Parking-Lots-Coding-Challenge-1e29d723606048bf833e6661cfd3aed5
