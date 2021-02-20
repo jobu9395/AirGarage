@@ -1,6 +1,6 @@
--AirGarage Low Quality Parking Lot Finder 
--Version 1.0 2/20/2021
--Author: Josh Burdett
+# AirGarage Low Quality Parking Lot Finder 
+### Version 1.0 2/20/2021
+### Author: Josh Burdett
 
 1. This app takes user input in the following format: 'city, state', and returns a list of up to 50 low 
 parking lots in thea area, listed in ascending order according to the metric: parking_lot_score
