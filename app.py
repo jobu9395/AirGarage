@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request
 from yelpapi import YelpAPI
 import pandas as pd
+from IPython.display import Image, HTML
 
 
 app = Flask(__name__)
@@ -15,7 +16,8 @@ def entry():
 @app.route('/form', methods=["POST"])
 def form():
     try:
-        yelp_api = YelpAPI('mi5qSSqdhmrNXBjLq5MBMwuqcS0q8aE4u52fwqrG8CkrBjjksgdV8ZblHdh4ThtDqQVFapfOwrCqadcTH4sJIMhQgEcWpc0bK_9ms_rJ1H-xMT1Amp4tmH_PhAg3X3Yx')
+        yelp_api = YelpAPI(
+            'mi5qSSqdhmrNXBjLq5MBMwuqcS0q8aE4u52fwqrG8CkrBjjksgdV8ZblHdh4ThtDqQVFapfOwrCqadcTH4sJIMhQgEcWpc0bK_9ms_rJ1H-xMT1Amp4tmH_PhAg3X3Yx')
 
         location = request.form.get("cityState")
         term = 'parking lot'
@@ -29,11 +31,17 @@ def form():
         for biz in response['businesses']:
             data = data.append(biz, ignore_index=True)
 
+
         data_adjustment(data)
+
         image_adjustment(data)
+        link_adjustment(data)
+        # address_adjustment(data)
+
         data = data.sort_values(by='parking_lot_score', ascending=True)
 
-        HTML_data = data.to_html()
+        HTML_data = data.to_html(escape=False)
+
         cityState = location
         cityState = cityState.title()
 
@@ -43,6 +51,7 @@ def form():
 
     except:
         return redirect(url_for('error_page'))
+
 
 @app.route('/error_page')
 def error_page():
@@ -66,10 +75,26 @@ def data_adjustment(data):
 
 def image_adjustment(data):
     for image_url in data['image_url']:
-        new_image_url = '<img src="%s", alt="business image", style="width:40px;heigh:40px">' % image_url
+        new_image_url = '<img src="%s", alt="business image", style="height:150px">' % image_url
         if image_url != '':
             data['image_url'] = data['image_url'].replace(image_url, new_image_url)
+
     return data['image_url']
+
+
+def link_adjustment(data):
+    for link_url in data['url']:
+        new_link_url = ' <a href="%s">Yelp page link</a> ' % link_url
+        data['url'] = data['url'].replace(link_url, new_link_url)
+
+    return data['url']
+
+
+# def address_adjustment(data):
+#     for address_dict in data['location']:
+#         new_address = (address_dict['address1'], address_dict['city'], address_dict['state'], address_dict['zip_code'])
+#         data['location'] = new_address
+#     return data['location']
 
 
 if __name__ == '__main__':
