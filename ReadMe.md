@@ -3,9 +3,9 @@
 ### Author: Josh Burdett
 
 1. This app takes user input in the following format: 'city, state', and returns a list of up to 50 low 
-parking lots in thea area, listed in ascending order according to the metric: parking_lot_score (defined in linked project requirements)
+parking lots in thea area, listed in ascending order according to the metric: parking_lot_score (defined in linked project requirements).
 
-2. Parking_lot score is defined as: score = ( number of reviews * rating ) / (number of reviews + 1)
+2. Parking_lot score is defined as: score = ( number of reviews * rating ) / (number of reviews + 1).
 
 3. Yelp's API enables this app.  If a user enters an invalid city or state, the user will be redirected to an error 
 page prompting them to enter a valid input.
@@ -17,4 +17,6 @@ go to the following URL: http://127.0.0.1:5000/
 
 6. Project requirements: https://www.notion.so/Lowest-Rated-Parking-Lots-Coding-Challenge-1e29d723606048bf833e6661cfd3aed5
 
-7. Project dependencies: Python 3.7, YelpAPI, Pandas
+7. Project dependencies: Python 3.7, YelpAPI, Pandas, Flask.
+
+8. main app file is app.py, HTML files are in the templates folder. 
