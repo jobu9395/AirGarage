@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, redirect, url_for, render_template, request
 from yelpapi import YelpAPI
 import pandas as pd
@@ -36,7 +38,7 @@ def form():
 
         image_adjustment(data)
         link_adjustment(data)
-        # address_adjustment(data)
+        address_adjustment(data)
 
         data = data.sort_values(by='parking_lot_score', ascending=True)
 
@@ -90,11 +92,18 @@ def link_adjustment(data):
     return data['url']
 
 
-# def address_adjustment(data):
-#     for address_dict in data['location']:
-#         new_address = (address_dict['address1'], address_dict['city'], address_dict['state'], address_dict['zip_code'])
-#         data['location'] = new_address
-#     return data['location']
+def address_adjustment(data):
+    for address_dict in data['location']:
+        del address_dict['address1'], address_dict['address2'], address_dict['address3'], address_dict['city'], address_dict['state'], address_dict['zip_code'], address_dict['country']
+    
+    return data['location']
+
+
+def dictionary_to_string(dict):
+    string = json.dumps(dict)
+    return string
+
+
 
 
 if __name__ == '__main__':
