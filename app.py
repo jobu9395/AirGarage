@@ -84,7 +84,7 @@ def image_adjustment(data):
 # formats a hyper link for the business location in HTML
 def link_adjustment(data):
     for link_url in data['url']:
-        new_link_url = ' <a href="%s">Yelp page link</a> ' % link_url
+        new_link_url = ' <a href="%s">Yelp Link</a> ' % link_url
         data['url'] = data['url'].replace(link_url, new_link_url)
 
     return data['url']
