@@ -1,5 +1,4 @@
 import json
-
 from flask import Flask, redirect, url_for, render_template, request
 from yelpapi import YelpAPI
 import pandas as pd
@@ -33,7 +32,6 @@ def form():
         for biz in response['businesses']:
             data = data.append(biz, ignore_index=True)
 
-
         data_adjustment(data)
 
         image_adjustment(data)
@@ -65,7 +63,7 @@ def data_adjustment(data):
     # add parking_lot_score
     rating = data.rating
     review_count = data.review_count
-    parking_lot_score = ( review_count * rating ) / (review_count + 1)
+    parking_lot_score = (review_count * rating) / (review_count + 1)
     data['parking_lot_score'] = parking_lot_score
 
     # remove columns
@@ -74,16 +72,16 @@ def data_adjustment(data):
 
     return data
 
-
+# formats image to be embedded in HTML page
 def image_adjustment(data):
     for image_url in data['image_url']:
-        new_image_url = '<img src="%s", alt="business image", style="height:150px">' % image_url
+        new_image_url = '<img src="%s", alt="business image", style="height:200px">' % image_url
         if image_url != '':
             data['image_url'] = data['image_url'].replace(image_url, new_image_url)
 
     return data['image_url']
 
-
+# formats a hyper link for the business location in HTML
 def link_adjustment(data):
     for link_url in data['url']:
         new_link_url = ' <a href="%s">Yelp page link</a> ' % link_url
@@ -91,19 +89,17 @@ def link_adjustment(data):
 
     return data['url']
 
-
+# formats the address to remove extraneous information
 def address_adjustment(data):
     for address_dict in data['location']:
         del address_dict['address1'], address_dict['address2'], address_dict['address3'], address_dict['city'], address_dict['state'], address_dict['zip_code'], address_dict['country']
-    
+
     return data['location']
 
-
+# helper function not currently used
 def dictionary_to_string(dict):
     string = json.dumps(dict)
     return string
-
-
 
 
 if __name__ == '__main__':
